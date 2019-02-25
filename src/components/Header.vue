@@ -4,7 +4,7 @@
     <ul>
       <li><a href="">首页</a></li>
       <li><a href="">新手入门</a></li>
-      <li><a href="">api</a></li>
+      <li><a href="">API</a></li>
       <li><a href="">关于</a></li>
       <li><a href="">注册</a></li>
       <li><a href="">登陆</a></li>
@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: "header"
+    name: "Header"
   }
 </script>
 
@@ -29,8 +29,8 @@
   }
 
   img {
-    margin-left: 50px;
-    margin-top: 10px;
+    margin-left: 76px;
+    margin-top: 8px;
     height: auto;
     width: 120px;
   }
