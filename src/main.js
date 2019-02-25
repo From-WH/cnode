@@ -6,11 +6,6 @@ import Axios from '../node_modules/axios'
 Vue.config.productionTip = false
 Vue.prototype.$http = Axios
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
-
 Vue.filter('formatDate', function (str) {
     if (!str) return ''
     var date = new Date(str)
@@ -37,7 +32,7 @@ Vue.filter('formatDate', function (str) {
 Vue.filter('tabFormatter',(post)=>{
   if(post.good === true){
     return '精华'
-}else if(post.top === true){
+  }else if(post.top === true){
     return '置顶'
   }else if(post.tab === 'ask'){
     return '问答'
@@ -48,3 +43,9 @@ Vue.filter('tabFormatter',(post)=>{
   }
 
 })
+
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+

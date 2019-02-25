@@ -19,8 +19,15 @@
       <div>
         <div class="topbar">回复</div>
         <div id="reply" v-for="(reply,index) in post.replies">
-          <img :src="reply.author.avatar_url" alt="">
-          <span>{{reply.author.loginname}}</span>
+          <router-link :to="{
+          name:'userInfo',
+          params:{
+          name:reply.author.loginname
+          }
+          }">
+            <img :src="reply.author.avatar_url" alt="">
+            <span>{{reply.author.loginname}}</span>
+          </router-link>
           <span>{{index + 1}}楼</span>
           <span class="zan" v-if="reply.ups.length > 0">
             ☝{{reply.ups.length}}
@@ -85,6 +92,9 @@
   #reply {
     padding: 10px 10px;
   }
+  #reply:nth-child(even) {
+    background-color: rgb(246,246,246);
+  }
 
   #reply img {
     width: 30px;
@@ -134,6 +144,7 @@
 
   .topic_header li {
     display: inline-block;
+    padding: 0 5px;
     font-size: 12px;
     color: #838383;
   }

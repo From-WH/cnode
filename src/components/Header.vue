@@ -1,6 +1,10 @@
 <template>
   <div class="header">
-    <img src="../assets/cnodejs_light.svg" alt="logo">
+    <router-link :to="{
+    name:'home',
+    }">
+      <img src="../assets/cnodejs_light.svg" alt="logo">
+    </router-link>
     <ul>
       <li><a href="">首页</a></li>
       <li><a href="">新手入门</a></li>
