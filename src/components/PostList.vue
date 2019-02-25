@@ -3,7 +3,7 @@
     <div v-if="isloading">
       <img src="../assets/loading.gif" alt="">
     </div>
-    <div class="posts">
+    <div class="posts" v-else>
       <ul>
         <div class="toobar">
           <li>
@@ -12,18 +12,32 @@
             <span>精华</span>
             <span>问答</span>
             <span>招聘</span>
-            </li>
+          </li>
         </div>
 
         <li v-for="post in posts">
+          <!--头像-->
           <img :src="post.author.avatar_url" alt="">
+          <!--浏览次数-->
           <span class="allcount">
             <span class="reply_count">{{post.reply_count}}</span>/{{post.visit_count}}
           </span>
-          <span :class="[{put_good:(post.good === true),put_top:(post.top === true),topiclist_tab:(post.good !== true && post.top !== true)}]">
+          <!--帖子状态-->
+          <span
+              :class="[{put_good:(post.good === true),put_top:(post.top === true),topiclist_tab:(post.good !== true && post.top !== true)}]">
             {{post | tabFormatter}}
           </span>
-          <span><a href="">{{post.title}}</a></span>
+          <!--帖子标题-->
+          <router-link :to="{
+              name:'post_content',
+              params:{
+              id:post.id
+             }
+            }">
+            <span>{{post.title}}</span>
+          </router-link>
+
+          <!--最后留言时间-->
           <span class="last_reply">{{post.last_reply_at | formatDate}}</span>
         </li>
       </ul>
@@ -32,29 +46,30 @@
 </template>
 
 <script>
+
   export default {
     name: "PostList",
-    data(){
-      return{
-        isloading:false,
-        posts:[]
+    data() {
+      return {
+        isloading: false,
+        posts: []
       }
     },
-    methods:{
-      getData(){
-        this.$http.get('https://cnodejs.org/api/v1/topics',{
-          page:1,
-          limit:20
-        }).then(res=>{
+    methods: {
+      getData() {
+        this.$http.get('https://cnodejs.org/api/v1/topics', {
+          page: 1,
+          limit: 20
+        }).then(res => {
           this.isloading = false
           this.posts = res.data.data
           console.log('成功')
-        }).catch(err=>{
+        }).catch(err => {
           console.log(返回失败);
         })
       }
     },
-    beforeMount(){
+    beforeMount() {
       this.isloading = true
       this.getData()
     }
@@ -62,9 +77,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .PostList{
+  .PostList {
     background-color: #e1e1e1;
   }
+
   .posts {
     margin-top: 10px;
   }
