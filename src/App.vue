@@ -13,13 +13,14 @@
   import Article from './components/Article'
   import UserInfo from './components/UserInfo'
 
+
   export default {
     name:'App',
     components:{
       Header,
       PostList,
       Article,
-      UserInfo
+      UserInfo,
     }
   }
 </script>

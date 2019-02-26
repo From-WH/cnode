@@ -40,26 +40,42 @@
           <!--最后留言时间-->
           <span class="last_reply">{{post.last_reply_at | formatDate}}</span>
         </li>
+        <li>
+          <!--分页-->
+          <pagination @handleList="renderList"></pagination>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-
+  import pagination from './Pagination'
   export default {
     name: "PostList",
     data() {
       return {
         isloading: false,
-        posts: []
+        posts: [],
+        postpage:1
       }
     },
+    components:{
+      pagination
+    },
     methods: {
+      renderList(value){
+        alert(value)
+        this.postpage = value;
+        this.getData();
+        console.log(this.postpage);
+      },
       getData() {
         this.$http.get('https://cnodejs.org/api/v1/topics', {
-          page: 1,
-          limit: 20
+          params:{
+            page: this.postpage,
+            limit: 20
+          }
         }).then(res => {
           this.isloading = false
           this.posts = res.data.data
@@ -67,12 +83,15 @@
         }).catch(err => {
           console.log(返回失败);
         })
-      }
+      },
+
     },
+
     beforeMount() {
       this.isloading = true
       this.getData()
-    }
+    },
+
   }
 </script>
 
