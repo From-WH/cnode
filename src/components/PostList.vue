@@ -51,20 +51,21 @@
 
 <script>
   import pagination from './Pagination'
+
   export default {
     name: "PostList",
     data() {
       return {
         isloading: false,
         posts: [],
-        postpage:1
+        postpage: 1
       }
     },
-    components:{
+    components: {
       pagination
     },
     methods: {
-      renderList(value){
+      renderList(value) {
         alert(value)
         this.postpage = value;
         this.getData();
@@ -72,7 +73,7 @@
       },
       getData() {
         this.$http.get('https://cnodejs.org/api/v1/topics', {
-          params:{
+          params: {
             page: this.postpage,
             limit: 20
           }
@@ -84,7 +85,6 @@
           console.log(返回失败);
         })
       },
-
     },
 
     beforeMount() {
